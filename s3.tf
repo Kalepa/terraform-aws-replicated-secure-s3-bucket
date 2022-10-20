@@ -1,6 +1,6 @@
 module "bucket_a" {
-  source  = "Invicton-Labs/secure-s3-bucket/aws"
-  version = "~>0.2.2"
+  source  = "Kalepa/secure-s3-bucket/aws"
+  version = "~> 0.2"
   providers = {
     aws = aws.a
   }
@@ -33,7 +33,7 @@ locals {
   // Otherwise, use the key that was used for bucket A as the base key
   b_kms_key_arn = var.kms_key_arn_b != null ? var.kms_key_arn_b : module.bucket_a.kms_key_arn
   // If a specific key was provided for bucket B, or we're supposed to create a new key for bucket B,
-  // use the input `create_replica_kms_key_b` variable as-is. 
+  // use the input `create_replica_kms_key_b` variable as-is.
   b_create_replica_key = var.kms_key_arn_b != null || local.create_new_kms_key_b ? local.create_replica_kms_key_b : (
     // Otherwise, check if a key was used for Bucket A (one provided, or new one created)
     var.kms_key_arn_a != null || local.create_new_kms_key_a ? (
@@ -47,8 +47,8 @@ locals {
 }
 
 module "bucket_b" {
-  source  = "Invicton-Labs/secure-s3-bucket/aws"
-  version = "~>0.2.2"
+  source  = "Kalepa/secure-s3-bucket/aws"
+  version = "~> 0.2"
   providers = {
     aws = aws.b
   }
@@ -77,8 +77,8 @@ module "bucket_b" {
 }
 
 module "replication" {
-  source  = "Invicton-Labs/secure-s3-bucket-replication/aws"
-  version = "~>0.1.0"
+  source  = "Kalepa/secure-s3-bucket-replication/aws"
+  version = "~> 0.1"
   providers = {
     aws.a = aws.a
     aws.b = aws.b
