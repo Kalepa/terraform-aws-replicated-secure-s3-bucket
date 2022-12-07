@@ -358,3 +358,9 @@ locals {
   a_to_b_rules = var.a_to_b_rules != null ? var.a_to_b_rules : []
   b_to_a_rules = var.b_to_a_rules != null ? var.b_to_a_rules : []
 }
+
+variable "tags" {
+  description = "Tags to apply to S3 bucket created in this module."
+  type        = map(string)
+  default     = {}
+}

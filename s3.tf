@@ -26,6 +26,7 @@ module "bucket_a" {
   object_lock_enabled           = local.object_lock_enabled_a
   force_destroy                 = local.force_destroy_a
   force_allow_cloudtrail_digest = local.force_allow_cloudtrail_digest_a
+  tags                          = var.tags
 }
 
 locals {
